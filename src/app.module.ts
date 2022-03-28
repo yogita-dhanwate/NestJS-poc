@@ -1,10 +1,16 @@
 import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProductsModule } from './products/products.module';
 
 @Module({
-  imports: [ProductsModule],   //to link modules together
+  imports: [
+    ProductsModule,
+    MongooseModule.forRoot(
+      'mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false',
+    ),
+  ], //to link modules together
   controllers: [AppController],
   providers: [AppService],
 })
